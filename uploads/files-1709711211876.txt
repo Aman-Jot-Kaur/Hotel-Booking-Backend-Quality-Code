@@ -1,0 +1,65 @@
+# Git Commands and Explanations
+
+1. git clone <repository_url>
+   - Clones a remote repository to your local machine.
+
+2. git checkout <branch_name>
+   - Switches to an existing branch.
+
+3. git checkout -b <new_branch_name>
+   - Creates and switches to a new branch.
+
+4. git add <file_name>
+   - Stages changes for the next commit.
+
+5. git commit -m "Your commit message"
+   - Records changes to the repository with a descriptive message.
+
+6. git push origin <branch_name>
+   - Pushes committed changes to a remote repository.
+
+7. git pull origin <branch_name>
+   - Fetches changes from a remote repository and merges them into the local branch.
+
+8. git merge <source_branch>
+   - Combines changes from a source branch into the target branch.
+
+9. git branch -d <branch_name>
+   - Deletes a local branch.
+
+10. git push origin --delete <branch_name>
+    - Deletes a remote branch.
+
+11. git log
+    - Displays the commit history.
+
+12. git commit --amend
+    - Modifies the last commit (useful for adding changes or fixing the message).
+
+13. git remote add <remote_name> <remote_url>
+    - Adds a new remote repository.
+
+14. git fetch <remote_name>
+    - Fetches changes from a remote repository.
+
+15. git push --force-with-lease origin <branch_name>
+    - Force-pushes changes, ensuring you're not overwriting others' work.
+
+16. git clone -b <branch_name> --single-branch <repository_url>
+    - Clones a specific branch from a remote repository.
+
+17. git rebase <base_branch>
+    - Applies changes from the current branch on top of another branch.
+
+18. git rebase --abort
+    - Aborts an ongoing rebase operation, reverting to the pre-rebase state.
+
+19. git rebase -i HEAD~n
+    - Initiates an interactive rebase, allowing you to squash, edit, or reorder commits.
+
+Feel free to add or modify these explanations based on your specific use cases.
+
+
+
+
+
