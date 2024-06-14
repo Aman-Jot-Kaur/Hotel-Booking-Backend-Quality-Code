@@ -3,7 +3,9 @@
 
 ## Overview
 
-This repository contains the backend for a hotel booking website. It includes features such as authentication, role-based authorization, and robust error handling. The project is organized to ensure maintainability, scalability, and security.
+This repository contains the backend for a hotel booking website.
+It includes features such as authentication, role-based authorization, and robust error handling.
+The project is organized to ensure maintainability, scalability, and security.
 
 ## Technologies Used
 
