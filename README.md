@@ -22,7 +22,7 @@ This repository contains the backend for a hotel booking website. It includes fe
 
 ## Folder Structure
 
-```
+
 config/                       # Configuration files
 db_connection.js              # Database connection setup
 controllers/                  # Handles incoming requests and responses
@@ -66,7 +66,7 @@ uploads/                      # File uploads
 package-lock.json             # Dependency lock file
 package.json                  # Project metadata and dependencies
 server.js                     # Server setup and initialization
-```
+
 
 ## Security Practices
 
