@@ -23,45 +23,54 @@ This repository contains the backend for a hotel booking website. It includes fe
 ## Folder Structure
 
 
-config/                       # Configuration files
-db_connection.js              # Database connection setup
-controllers/                  # Handles incoming requests and responses
+config/                       
+  db_connection.js            # Database connection setup
+
+controllers/                  
   booking_controller.js       # Logic for booking-related routes
   hotel_controller.js         # Logic for hotel-related routes
   index.js                    # Export all controllers
   user_controller.js          # Logic for user-related routes
-libs/                         # Utility libraries and constants
+
+libs/                         
   constants/                  # Constants used across the application
   error.js                    # Custom error classes
   utils.js                    # Helper functions
-middlewares/                  # Middleware functions
+
+middlewares/                  
   auth_middleware.js          # Authentication check
   check_admin_role.js         # Admin role validation
   check_owner_role.js         # Owner role validation
   date_validation_middleware.js # Date validation logic
   index.js                    # Export all middlewares
-models/                       # Database schemas and models
+
+models/                       
   booking_model.js            # Booking schema and model
   hotel_model.js              # Hotel schema and model
   index.js                    # Export all models
   user_model.js               # User schema and model
-repositories/                 # Data access layer
+
+repositories/                 
   base_repository.js          # Base repository with common methods
   bookings_repository.js      # Booking-related database operations
   hotels_repository.js        # Hotel-related database operations
   index.js                    # Export all repositories
   users_repository.js         # User-related database operations
-routes/                       # Route definitions
+
+routes/                       
   booking_router.js           # Routes for booking operations
   hotel_router.js             # Routes for hotel operations
   index.js                    # Export all routers
   user_router.js              # Routes for user operations
-services/                     # Business logic layer
+
+services/                     
   booking_services.js         # Business logic for bookings
   hotel_services.js           # Business logic for hotels
   index.js                    # Export all services
   user_services.js            # Business logic for users
+
 uploads/                      # File uploads
+
 .env                          # Environment variables
 package-lock.json             # Dependency lock file
 package.json                  # Project metadata and dependencies
@@ -70,36 +79,50 @@ server.js                     # Server setup and initialization
 
 ## Security Practices
 
+This project is designed as an example of secure coding practices. Here are the key security measures implemented:
+
 ### JWT Authentication
 
-Ensures that users are authenticated before accessing protected routes. Each request must include a valid token.
+- Ensures that users are authenticated before accessing protected routes.
+- Each request must include a valid JWT token, which verifies the user's identity.
 
 ### Role-based Authorization
 
-Different roles such as `admin` and `user` have varying levels of access. Middleware checks ensure users have the necessary permissions.
+- Different roles such as `admin` and `user` have varying levels of access.
+- Middleware checks ensure users have the necessary permissions to access specific routes, enhancing security by enforcing role-based access control.
 
 ### Input Validation
 
-Middleware functions like `date_validation_middleware.js` validate user inputs to prevent invalid data from being processed.
+- Middleware functions like `date_validation_middleware.js` validate user inputs to prevent invalid data from being processed.
+- Ensures data integrity and prevents common issues related to malformed input.
 
 ### Data Sanitization
 
-Libraries such as `xss-clean` and `express-mongo-sanitize` are used to sanitize user inputs and prevent XSS and NoSQL injection attacks.
+- Libraries such as `xss-clean` and `express-mongo-sanitize` are used to sanitize user inputs.
+- These libraries help prevent XSS (Cross-Site Scripting) and NoSQL injection attacks by cleaning the input data.
+
+### Password Security
+
+- `bcrypt.js` is used to hash passwords before storing them in the database, ensuring that plain-text passwords are never saved directly.
+- Passwords are never included in API responses, protecting sensitive user information.
 
 ### HTTP Headers
 
-`helmet` is used to set secure HTTP headers, protecting the app from common vulnerabilities.
+- `helmet` is used to set secure HTTP headers, protecting the app from common vulnerabilities such as clickjacking, MIME type sniffing, and more.
+- Adds an additional layer of security by configuring various HTTP headers appropriately.
 
 ### Error Handling
 
-Custom error classes standardize error responses, improving the clarity and consistency of error handling.
+- Custom error classes standardize error responses, improving the clarity and consistency of error handling.
+- Provides meaningful error messages to clients while hiding sensitive information that could be exploited by attackers.
+
 
 ## Usage
 
 1. **Clone the repository**:
    ```bash
-   git clone <repository_url>
-   cd <repository_name>
+   git clone https://github.com/Aman-Jot-Kaur/Hotel-Booking-Backend-Quality-Code.git
+   cd Hotel-Booking-Backend-Quality-Code
    ```
 
 2. **Install dependencies**:
@@ -118,4 +141,3 @@ Custom error classes standardize error responses, improving the clarity and cons
 ## Conclusion
 
 This backend structure is designed to be scalable, maintainable, and secure, making it an excellent foundation for any hotel booking system. Enjoy building and enhancing your application!
-```
