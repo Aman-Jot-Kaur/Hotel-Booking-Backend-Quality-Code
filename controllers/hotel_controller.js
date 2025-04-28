@@ -1,4 +1,6 @@
 const { request } = require("http");
+const { redis_client } = require("../libs/redis");
+
 const { no_content, not_found } = require("../libs/error");
 const { error_handler } = require("../libs/utils");
 const { hotel_services } = require("../services");
@@ -28,8 +30,21 @@ exports.add_hotel = async (req, res) => {
 
 exports.get_all_hotels = async (req, res) => {
   try {
+    
+    const cacheKey = JSON.stringify(req.query) || "all_hotels";
+
+    const cachedData = await redis_client.get(cacheKey);
+    if (cachedData) {
+      console.log("Serving from Redis Cache");
+      return res.status(200).json(JSON.parse(cachedData));
+    }
+
     const response = await hotel_services.get_all_hotels({ query: req.query });
     if (!response) throw new no_content("hotels could not be found.");
+
+  
+    await redis_client.set(cacheKey, JSON.stringify(response), { EX: 300 }); 
+
     return res.status(200).json(response);
   } catch (error) {
     console.log("error in get all hotels controller", error);

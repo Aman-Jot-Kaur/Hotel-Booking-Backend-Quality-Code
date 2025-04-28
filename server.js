@@ -10,6 +10,8 @@ const cors = require("cors");
 const helmet = require("helmet");
 const xss = require("xss-clean");
 const express_mongo_sanitize = require("express-mongo-sanitize");
+const cluster = require('cluster');
+const os = require('os');
 const app = express();
 const http = require("http");
 const server = http.createServer(app);
@@ -22,10 +24,26 @@ app.use(express.json({ limit: "50mb", extended: true }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(cors());
 app.use("/uploads", express.static("uploads"));
-require("./config/db_connection").db_connection();
-app.listen(global.port, () => {
-  console.log(`Server is listening on port ${global.port}`);
-});
+require("./config/db_connection").db_connection();const numCPUs = os.cpus().length;
+
+if (cluster.isMaster) {
+    console.log(`Master ${process.pid} is running`);
+
+    // Fork workers.
+    for (let i = 0; i < numCPUs; i++) {
+        cluster.fork();
+    }
+
+    cluster.on('exit', (worker, code, signal) => {
+        console.log(`Worker ${worker.process.pid} died`);
+        console.log('Starting a new worker');
+        cluster.fork();
+    });
+} else {
+    app.listen(global.port, () => {
+        console.log(`Worker ${process.pid} started on port ${global.port}`);
+    });
+}
 io.on("connection", (socket) => {
   console.log("a user connected");
 

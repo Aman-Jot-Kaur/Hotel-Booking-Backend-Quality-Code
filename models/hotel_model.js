@@ -19,7 +19,7 @@ const hotel_schema = new Schema(
   {
     name: {
       type: String,
-      requied: true,
+      required: true,
     },
     uuid: {
       type: String,
@@ -111,6 +111,11 @@ hotel_schema.pre("findOneAndUpdate", function (next) {
   next();
 });
 
-
+hotel_schema.index({ uuid: 1 }, { unique: true });
+hotel_schema.index({ name: "text" });
+hotel_schema.index({ location: "text" });
+hotel_schema.index({ status: 1 });
+hotel_schema.index({ full_day_price: 1 });
+hotel_schema.index({ rooms_available: 1 });
 
 module.exports = model("hotels", hotel_schema);
