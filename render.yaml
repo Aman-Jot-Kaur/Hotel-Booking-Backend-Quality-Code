@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: hotel-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node index.js
+    envVars:
+      - key: APP_PORT
+        value: 10000
+      - key: NODE_ENV 
+        value: deployment
+      - key: MONGO_URL
+        value: mongodb+srv://amanjotkn:amanjotkn@hotelbooking.5nhztx5.mongodb.net/
+      - key: SECRET_KEY
+        value: any
+      - key: REDIS_URL
+        value: rediss://default:AYg1AAIjcDFmN2RmMDZhNDZmM2Y0ZmNlODdiZjRlOWEwZTRkODVmYXAxMA@trusty-louse-34869.upstash.io:6379
